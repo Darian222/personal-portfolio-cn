@@ -182,7 +182,8 @@
             留言内容
             <textarea name="留言" placeholder="请简单介绍合作意向..." required></textarea>
           </label>
-          <button type="submit">发送咨询</button>
+          <button type="submit" id="submit-btn">发送咨询</button>
+          <p id="form-msg" style="grid-column:1/-1;margin:0;font-size:14px;"></p>
         </form>
       </section>
     </main>
@@ -194,14 +195,41 @@
     <script>
       (function() {
         var form = document.getElementById('contact-form');
+        var btn = document.getElementById('submit-btn');
+        var msg = document.getElementById('form-msg');
         form.addEventListener('submit', function(e) {
           e.preventDefault();
+          btn.disabled = true;
+          btn.textContent = '发送中...';
+          msg.textContent = '';
+          msg.style.color = '';
           var name = form.querySelector('[name="姓名"]').value;
           var email = form.querySelector('[name="邮箱"]').value;
-          var msg = form.querySelector('[name="留言"]').value;
-          var body = '姓名：' + name + '%0D%0A邮箱：' + email + '%0D%0A留言：' + msg;
-          var url = 'mailto:1449157740@qq.com?subject=' + name + '的咨询&body=' + body;
-          window.location.href = url;
+          var message = form.querySelector('[name="留言"]').value;
+          fetch('https://personal-portfolio-cn.cdh1449157740.workers.dev/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, email: email, message: message }),
+          })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+              if (data.ok) {
+                msg.style.color = '#2d7d46';
+                msg.textContent = '发送成功，我会尽快回复！';
+                form.reset();
+              } else {
+                msg.style.color = '#c53030';
+                msg.textContent = data.error || '发送失败，请稍后重试';
+              }
+            })
+            .catch(function() {
+              msg.style.color = '#c53030';
+              msg.textContent = '网络错误，请稍后重试';
+            })
+            .then(function() {
+              btn.disabled = false;
+              btn.textContent = '发送咨询';
+            });
         });
       })();
     </script>
