@@ -199,11 +199,9 @@
           var name = form.querySelector('[name="姓名"]').value;
           var email = form.querySelector('[name="邮箱"]').value;
           var msg = form.querySelector('[name="留言"]').value;
-          var body = '姓名：' + name + '\n邮箱：' + email + '\n留言：' + msg;
-          var mailto = 'mailto:1449157740@qq.com'
-            + '?subject=' + encodeURIComponent(name + '的咨询')
-            + '&body=' + encodeURIComponent(body);
-          window.location.href = mailto;
+          var body = '姓名：' + name + '%0D%0A邮箱：' + email + '%0D%0A留言：' + msg;
+          var url = 'mailto:1449157740@qq.com?subject=' + name + '的咨询&body=' + body;
+          window.location.href = url;
         });
       })();
     </script>
