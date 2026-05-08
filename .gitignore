@@ -1,0 +1,5 @@
+.vercel
+node_modules
+.wrangler
+wrangler-dev*.log
+wrangler-login*.log
