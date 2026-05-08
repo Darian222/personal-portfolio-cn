@@ -169,7 +169,7 @@
             <span>18107439735</span>
           </div>
         </div>
-        <form class="contact-form" action="mailto:1449157740@qq.com" method="post" enctype="text/plain">
+        <form class="contact-form" id="contact-form">
           <label>
             您的姓名
             <input type="text" name="姓名" placeholder="张先生 / 李女士" required />
@@ -191,5 +191,21 @@
       <p>蔡道涵 · 以诚致学 · 以实成事</p>
       <small>© 2026 个人简历. Built with sincerity.</small>
     </footer>
+    <script>
+      (function() {
+        var form = document.getElementById('contact-form');
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var name = form.querySelector('[name="姓名"]').value;
+          var email = form.querySelector('[name="邮箱"]').value;
+          var msg = form.querySelector('[name="留言"]').value;
+          var body = '姓名：' + name + '\n邮箱：' + email + '\n留言：' + msg;
+          var mailto = 'mailto:1449157740@qq.com'
+            + '?subject=' + encodeURIComponent(name + '的咨询')
+            + '&body=' + encodeURIComponent(body);
+          window.location.href = mailto;
+        });
+      })();
+    </script>
   </body>
 </html>
