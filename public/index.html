@@ -206,7 +206,7 @@
           var name = form.querySelector('[name="姓名"]').value;
           var email = form.querySelector('[name="邮箱"]').value;
           var message = form.querySelector('[name="留言"]').value;
-          fetch('https://personal-portfolio-cn.cdh1449157740.workers.dev/api/contact', {
+          fetch('https://personal-portfolio-cn-81tzkr145fng.darian222.deno.net/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: name, email: email, message: message }),
