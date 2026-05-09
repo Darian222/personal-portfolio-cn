@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "personal-portfolio-cn",
+  "name": "personal-portfolio",
   "compatibility_date": "2026-05-08",
   "workers_dev": true,
   "preview_urls": true,
