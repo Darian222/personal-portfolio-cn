@@ -418,6 +418,11 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 footer {
   padding: 76px 24px 56px;
   text-align: center;

@@ -1,0 +1,10 @@
+{
+  "buildCommand": "echo 'static + api'",
+  "outputDirectory": "public",
+  "functions": {
+    "api/contact.js": {
+      "memory": 512,
+      "maxDuration": 10
+    }
+  }
+}

@@ -190,45 +190,77 @@
 
     <footer>
       <p>蔡道涵 · 以诚致学 · 以实成事</p>
-      <small>© 2026 个人简历. Built with sincerity.</small>
+      <small>© <span id="current-year">2026</span> 个人简历. Built with sincerity.</small>
     </footer>
     <script>
       (function() {
+        document.getElementById('current-year').textContent = new Date().getFullYear();
         var form = document.getElementById('contact-form');
         var btn = document.getElementById('submit-btn');
         var msg = document.getElementById('form-msg');
+
+        var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var TIMEOUT_MS = 10000;
+
+        function showMsg(text, isError) {
+          msg.textContent = text;
+          msg.style.color = isError ? '#c53030' : '#2d7d46';
+        }
+
+        function setLoading(loading) {
+          btn.disabled = loading;
+          btn.textContent = loading ? '发送中...' : '发送咨询';
+        }
+
         form.addEventListener('submit', function(e) {
           e.preventDefault();
-          btn.disabled = true;
-          btn.textContent = '发送中...';
-          msg.textContent = '';
-          msg.style.color = '';
-          var name = form.querySelector('[name="姓名"]').value;
-          var email = form.querySelector('[name="邮箱"]').value;
-          var message = form.querySelector('[name="留言"]').value;
-          fetch('https://personal-portfolio-cn-81tzkr145fng.darian222.deno.net/api/contact', {
+          showMsg('', false);
+
+          var name = form.querySelector('[name="姓名"]').value.trim();
+          var email = form.querySelector('[name="邮箱"]').value.trim();
+          var message = form.querySelector('[name="留言"]').value.trim();
+
+          if (!name || !email || !message) {
+            showMsg('请填写所有字段', true);
+            return;
+          }
+
+          if (!EMAIL_RE.test(email)) {
+            showMsg('请输入有效的邮箱地址', true);
+            return;
+          }
+
+          setLoading(true);
+
+          var controller = new AbortController();
+          var timeout = setTimeout(function() { controller.abort(); }, TIMEOUT_MS);
+
+          fetch('/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: name, email: email, message: message }),
+            signal: controller.signal,
           })
             .then(function(res) { return res.json(); })
             .then(function(data) {
+              clearTimeout(timeout);
               if (data.ok) {
-                msg.style.color = '#2d7d46';
-                msg.textContent = '发送成功，我会尽快回复！';
+                showMsg('发送成功，我会尽快回复！', false);
                 form.reset();
               } else {
-                msg.style.color = '#c53030';
-                msg.textContent = data.error || '发送失败，请稍后重试';
+                showMsg(data.error || '发送失败，请稍后重试', true);
               }
             })
-            .catch(function() {
-              msg.style.color = '#c53030';
-              msg.textContent = '网络错误，请稍后重试';
+            .catch(function(err) {
+              clearTimeout(timeout);
+              if (err.name === 'AbortError') {
+                showMsg('请求超时，请稍后重试', true);
+              } else {
+                showMsg('网络错误，请稍后重试', true);
+              }
             })
             .then(function() {
-              btn.disabled = false;
-              btn.textContent = '发送咨询';
+              setLoading(false);
             });
         });
       })();

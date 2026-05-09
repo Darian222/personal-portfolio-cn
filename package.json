@@ -9,5 +9,8 @@
   },
   "devDependencies": {
     "wrangler": "^4.90.0"
+  },
+  "dependencies": {
+    "nodemailer": "^6.10.0"
   }
 }

@@ -12,6 +12,9 @@ function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+var MAX_MESSAGE_LEN = 5000;
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -34,9 +37,20 @@ export default {
         return json({ ok: false, error: '无效的请求数据' }, 400);
       }
 
-      const { name, email, message } = data;
+      const name = typeof data.name === 'string' ? data.name.trim() : '';
+      const email = typeof data.email === 'string' ? data.email.trim() : '';
+      const message = typeof data.message === 'string' ? data.message.trim() : '';
+
       if (!name || !email || !message) {
         return json({ ok: false, error: '请填写所有字段' }, 400);
+      }
+
+      if (!EMAIL_RE.test(email)) {
+        return json({ ok: false, error: '请输入有效的邮箱地址' }, 400);
+      }
+
+      if (message.length > MAX_MESSAGE_LEN) {
+        return json({ ok: false, error: '留言内容过长，请精简后发送' }, 400);
       }
 
       if (!env.RESEND_API_KEY) {
