@@ -203,13 +203,23 @@
         var TIMEOUT_MS = 10000;
 
         function showMsg(text, isError) {
-          msg.textContent = text;
+          msg.innerHTML = text;
           msg.style.color = isError ? '#c53030' : '#2d7d46';
         }
 
         function setLoading(loading) {
           btn.disabled = loading;
           btn.textContent = loading ? '发送中...' : '发送咨询';
+        }
+
+        function mailtoLink(name, email, message) {
+          var subject = encodeURIComponent(name + ' 的咨询留言');
+          var body = encodeURIComponent(
+            '姓名：' + name + '\n' +
+            '邮箱：' + email + '\n\n' +
+            '留言内容：\n' + message
+          );
+          return 'mailto:1449157740@qq.com?subject=' + subject + '&body=' + body;
         }
 
         form.addEventListener('submit', function(e) {
@@ -248,16 +258,19 @@
                 showMsg('发送成功，我会尽快回复！', false);
                 form.reset();
               } else {
-                showMsg(data.error || '发送失败，请稍后重试', true);
+                showMsg(
+                  data.error + '。或直接发送邮件：<a href="' + mailtoLink(name, email, message) + '" style="color:#1a3a5c;text-decoration:underline">使用邮件客户端发送</a>',
+                  true
+                );
               }
             })
             .catch(function(err) {
               clearTimeout(timeout);
-              if (err.name === 'AbortError') {
-                showMsg('请求超时，请稍后重试', true);
-              } else {
-                showMsg('网络错误，请稍后重试', true);
-              }
+              var tip = (err.name === 'AbortError') ? '请求超时' : '网络错误';
+              showMsg(
+                tip + '。请直接发送邮件：<a href="' + mailtoLink(name, email, message) + '" style="color:#1a3a5c;text-decoration:underline">使用邮件客户端发送</a>',
+                true
+              );
             })
             .then(function() {
               setLoading(false);
