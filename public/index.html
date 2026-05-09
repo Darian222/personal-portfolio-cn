@@ -245,7 +245,7 @@
           var controller = new AbortController();
           var timeout = setTimeout(function() { controller.abort(); }, TIMEOUT_MS);
 
-          fetch('https://personal-portfolio-cn.vercel.app/api/contact', {
+          fetch('https://1430387116-b6dsj7177h.ap-guangzhou.tencentscf.com', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: name, email: email, message: message }),
