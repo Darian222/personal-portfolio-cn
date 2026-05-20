@@ -5,19 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>蔡道涵 - 个人简历</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#top">蔡道涵</a>
-      <nav class="nav" aria-label="主导航">
-        <a href="#about">关于</a>
-        <a href="#skills">技能</a>
-        <a href="#projects">经历</a>
-        <a href="#education">教育</a>
-        <a href="#contact">联系</a>
+    <div class="card-nav-container">
+      <nav class="card-nav" aria-label="主导航">
+        <div class="card-nav-top">
+          <div class="hamburger-menu" role="button" aria-label="打开菜单" tabindex="0">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </div>
+          <div class="logo-container">
+            <a href="#top" style="color:inherit;font-weight:700;font-size:18px;">蔡道涵</a>
+          </div>
+          <a class="card-nav-cta-button" href="#contact">联系我</a>
+        </div>
+        <div class="card-nav-content" aria-hidden="true">
+          <div class="nav-card" style="background-color:#1B1722;color:#fff;">
+            <div class="nav-card-label">关于</div>
+            <div class="nav-card-links">
+              <a class="nav-card-link" href="#about" aria-label="关于我">
+                <svg class="nav-card-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                关于我
+              </a>
+            </div>
+          </div>
+          <div class="nav-card" style="background-color:#2F293A;color:#fff;">
+            <div class="nav-card-label">经历</div>
+            <div class="nav-card-links">
+              <a class="nav-card-link" href="#skills" aria-label="专业技能">
+                <svg class="nav-card-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                专业技能
+              </a>
+              <a class="nav-card-link" href="#projects" aria-label="校园经历">
+                <svg class="nav-card-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                校园经历
+              </a>
+            </div>
+          </div>
+          <div class="nav-card" style="background-color:#2F293A;color:#fff;">
+            <div class="nav-card-label">联系</div>
+            <div class="nav-card-links">
+              <a class="nav-card-link" href="#education" aria-label="教育背景">
+                <svg class="nav-card-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                教育背景
+              </a>
+              <a class="nav-card-link" href="#contact" aria-label="联系方式">
+                <svg class="nav-card-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                联系方式
+              </a>
+            </div>
+          </div>
+        </div>
       </nav>
-      <a class="header-button" href="#contact">联系我</a>
-    </header>
+    </div>
 
     <main id="top">
       <section class="hero section-grid">
@@ -316,23 +357,98 @@
         });
       })();
 
-      /* ── Navbar scroll effect ── */
+      /* ── CardNav animation ── */
       (function() {
-        var header = document.querySelector('.site-header');
-        var ticking = false;
-        window.addEventListener('scroll', function() {
-          if (!ticking) {
-            requestAnimationFrame(function() {
-              if (window.scrollY > 60) {
-                header.style.boxShadow = '0 2px 20px rgba(13,33,55,0.08)';
-                header.style.background = 'rgba(251,250,246,0.98)';
-              } else {
-                header.style.boxShadow = 'none';
-                header.style.background = 'rgba(251,250,246,0.92)';
-              }
-              ticking = false;
-            });
-            ticking = true;
+        var navEl = document.querySelector('.card-nav');
+        var hamburger = document.querySelector('.hamburger-menu');
+        var content = document.querySelector('.card-nav-content');
+        var cards = document.querySelectorAll('.nav-card');
+        var links = document.querySelectorAll('.nav-card-link');
+        var isExpanded = false;
+        var tl = null;
+
+        function calculateHeight() {
+          var isMobile = window.matchMedia('(max-width: 768px)').matches;
+          if (isMobile) {
+            var wasVis = content.style.visibility;
+            var wasPE = content.style.pointerEvents;
+            var wasPos = content.style.position;
+            var wasH = content.style.height;
+            content.style.visibility = 'visible';
+            content.style.pointerEvents = 'auto';
+            content.style.position = 'static';
+            content.style.height = 'auto';
+            var h = 60 + content.scrollHeight + 16;
+            content.style.visibility = wasVis;
+            content.style.pointerEvents = wasPE;
+            content.style.position = wasPos;
+            content.style.height = wasH;
+            return h;
+          }
+          return 260;
+        }
+
+        function createTimeline() {
+          if (typeof gsap === 'undefined') return null;
+          gsap.set(navEl, { height: 60, overflow: 'hidden' });
+          gsap.set(cards, { y: 50, opacity: 0 });
+
+          var t = gsap.timeline({ paused: true });
+          t.to(navEl, { height: calculateHeight, duration: 0.4, ease: 'power3.out' });
+          t.to(cards, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out', stagger: 0.08 }, '-=0.1');
+          return t;
+        }
+
+        // Wait for GSAP to load
+        function init() {
+          tl = createTimeline();
+        }
+
+        if (typeof gsap !== 'undefined') {
+          init();
+        } else {
+          window.addEventListener('load', init);
+        }
+
+        function toggleMenu() {
+          if (!tl) { tl = createTimeline(); }
+          if (!tl) return;
+          if (!isExpanded) {
+            hamburger.classList.add('open');
+            isExpanded = true;
+            content.setAttribute('aria-hidden', 'false');
+            tl.play(0);
+          } else {
+            hamburger.classList.remove('open');
+            content.setAttribute('aria-hidden', 'true');
+            tl.eventCallback('onReverseComplete', function() { isExpanded = false; });
+            tl.reverse();
+          }
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        hamburger.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+        });
+
+        // Close menu when a link is clicked
+        links.forEach(function(link) {
+          link.addEventListener('click', function() {
+            if (isExpanded) toggleMenu();
+          });
+        });
+
+        // Recalculate on resize
+        window.addEventListener('resize', function() {
+          if (!tl) return;
+          if (isExpanded) {
+            gsap.set(navEl, { height: calculateHeight() });
+            tl.kill();
+            tl = createTimeline();
+            if (tl) tl.progress(1);
+          } else {
+            tl.kill();
+            tl = createTimeline();
           }
         });
       })();
