@@ -435,6 +435,33 @@ footer p {
   font-weight: 700;
 }
 
+/* ── Click spark ── */
+.click-spark {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+  animation: spark-fly 500ms ease-out forwards;
+}
+
+@keyframes spark-fly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--sx), var(--sy)) scale(0);
+  }
+}
+
 /* ── Scroll reveal animations ── */
 .reveal {
   opacity: 0;

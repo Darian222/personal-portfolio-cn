@@ -293,6 +293,29 @@
         els.forEach(function(el) { io.observe(el); });
       })();
 
+      /* ── Click spark ── */
+      (function() {
+        var SPARK_COUNT = 13;
+        var SPARK_RADIUS = 39;
+        var EXTRA_SCALE = 1;
+        document.addEventListener('click', function(e) {
+          for (var i = 0; i < SPARK_COUNT; i++) {
+            var spark = document.createElement('div');
+            spark.className = 'click-spark';
+            var angle = (Math.PI * 2 * i) / SPARK_COUNT + (Math.random() - 0.5) * 0.5;
+            var dist = SPARK_RADIUS * (0.6 + Math.random() * 0.4) * EXTRA_SCALE;
+            spark.style.left = e.clientX - 8 + 'px';
+            spark.style.top = e.clientY - 8 + 'px';
+            spark.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
+            spark.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
+            document.body.appendChild(spark);
+            (function(el) {
+              setTimeout(function() { el.remove(); }, 500);
+            })(spark);
+          }
+        });
+      })();
+
       /* ── Navbar scroll effect ── */
       (function() {
         var header = document.querySelector('.site-header');
