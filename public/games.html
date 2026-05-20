@@ -67,6 +67,7 @@
               <p><kbd>空格</kbd> 直落</p>
             </div>
             <button class="game-btn" id="tetris-start">开始游戏</button>
+            <button class="game-btn game-pause-btn" id="tetris-pause" style="display:none;margin-top:8px;background:var(--muted)">暂停</button>
           </div>
           <div class="canvas-wrap">
             <canvas id="tetris-canvas" width="300" height="600" style="touch-action:none"></canvas>
@@ -98,6 +99,7 @@
               <p><kbd>空格</kbd> 暂停</p>
             </div>
             <button class="game-btn" id="snake-start">开始游戏</button>
+            <button class="game-btn game-pause-btn" id="snake-pause" style="display:none;margin-top:8px;background:var(--muted)">暂停</button>
           </div>
           <div class="canvas-wrap">
             <canvas id="snake-canvas" width="400" height="400" style="touch-action:none"></canvas>
@@ -273,10 +275,12 @@
             drawNext();
             if (!valid(piece, board)) {
               running = false;
+              paused = false;
               cancelAnimationFrame(animId);
               overlay.style.display = 'flex';
               overlay.querySelector('p').textContent = '游戏结束！得分：' + score;
               startBtn.textContent = '重新开始';
+              pauseBtn.style.display = 'none';
               return;
             }
           }
@@ -301,8 +305,31 @@
           overlay.style.display = 'none';
           running = true;
           startBtn.textContent = '重新开始';
+          pauseBtn.style.display = '';
+          pauseBtn.textContent = '暂停';
           animId = requestAnimationFrame(tick);
         }
+
+        var pauseBtn = document.getElementById('tetris-pause');
+        var paused = false;
+        function togglePause() {
+          if (!running) return;
+          paused = !paused;
+          if (paused) {
+            running = false;
+            cancelAnimationFrame(animId);
+            overlay.style.display = 'flex';
+            overlay.querySelector('p').textContent = '已暂停';
+            pauseBtn.textContent = '继续';
+          } else {
+            running = true;
+            dropTimer = null;
+            overlay.style.display = 'none';
+            pauseBtn.textContent = '暂停';
+            animId = requestAnimationFrame(tick);
+          }
+        }
+        pauseBtn.addEventListener('click', togglePause);
 
         function movePiece(dx) {
           if (!running) return;
@@ -445,9 +472,11 @@
 
         function gameOver() {
           running = false;
+          snakePaused = false;
           overlay.style.display = 'flex';
           overlay.querySelector('p').textContent = '游戏结束！得分：' + score;
           startBtn.textContent = '重新开始';
+          snakePauseBtn.style.display = 'none';
         }
 
         function loop(ts) {
@@ -465,9 +494,32 @@
           placeFood();
           overlay.style.display = 'none';
           running = true;
+          snakePaused = false;
           startBtn.textContent = '重新开始';
+          snakePauseBtn.style.display = '';
+          snakePauseBtn.textContent = '暂停';
           animId = requestAnimationFrame(loop);
         }
+
+        var snakePauseBtn = document.getElementById('snake-pause');
+        var snakePaused = false;
+        function toggleSnakePause() {
+          if (!running && !snakePaused) return;
+          snakePaused = !snakePaused;
+          if (snakePaused) {
+            running = false;
+            overlay.style.display = 'flex';
+            overlay.querySelector('p').textContent = '已暂停';
+            snakePauseBtn.textContent = '继续';
+          } else {
+            running = true;
+            lastTime = null;
+            overlay.style.display = 'none';
+            snakePauseBtn.textContent = '暂停';
+            animId = requestAnimationFrame(loop);
+          }
+        }
+        snakePauseBtn.addEventListener('click', toggleSnakePause);
 
         startBtn.addEventListener('click', startGame);
 
@@ -477,7 +529,7 @@
             if (e.key === ' ') { e.preventDefault(); startGame(); }
             return;
           }
-          if (e.key === ' ') { e.preventDefault(); running = !running; if (running) animId = requestAnimationFrame(loop); return; }
+          if (e.key === ' ') { e.preventDefault(); toggleSnakePause(); return; }
           if (e.key === 'ArrowLeft' && dir.x !== 1) { e.preventDefault(); nextDir = { x: -1, y: 0 }; }
           else if (e.key === 'ArrowRight' && dir.x !== -1) { e.preventDefault(); nextDir = { x: 1, y: 0 }; }
           else if (e.key === 'ArrowUp' && dir.y !== 1) { e.preventDefault(); nextDir = { x: 0, y: -1 }; }
