@@ -710,15 +710,37 @@ footer p {
   }
 
   .game-section {
-    padding-bottom: 56px;
+    padding: 0 16px 56px;
   }
 
   .canvas-wrap {
     order: -1;
   }
 
+  .game-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .game-info h2 {
+    grid-column: 1 / -1;
+  }
+
+  .game-controls {
+    display: none;
+  }
+
+  .games-hero {
+    padding-top: 90px;
+  }
+
   .games-hero h1 {
     font-size: 32px;
+  }
+
+  .next-piece-wrap {
+    display: none;
   }
 }
 
@@ -861,11 +883,14 @@ kbd {
   position: relative;
   display: flex;
   justify-content: center;
+  touch-action: none;
 }
 
 .canvas-wrap canvas {
   border: 1px solid var(--line);
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .game-overlay {
@@ -884,4 +909,25 @@ kbd {
   padding: 20px 32px;
   background: #fff;
   border: 1px solid var(--line);
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .game-info {
+    grid-template-columns: 1fr;
+  }
+
+  .game-tabs {
+    padding: 0 16px 24px;
+  }
+
+  .game-tab {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+  }
 }
