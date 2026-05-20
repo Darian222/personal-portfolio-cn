@@ -69,7 +69,7 @@
             <button class="game-btn" id="tetris-start">开始游戏</button>
           </div>
           <div class="canvas-wrap">
-            <canvas id="tetris-canvas" width="300" height="600"></canvas>
+            <canvas id="tetris-canvas" width="300" height="600" style="touch-action:none"></canvas>
             <div class="game-overlay" id="tetris-overlay">
               <p>按"开始游戏"开始</p>
             </div>
@@ -100,7 +100,7 @@
             <button class="game-btn" id="snake-start">开始游戏</button>
           </div>
           <div class="canvas-wrap">
-            <canvas id="snake-canvas" width="400" height="400"></canvas>
+            <canvas id="snake-canvas" width="400" height="400" style="touch-action:none"></canvas>
             <div class="game-overlay" id="snake-overlay">
               <p>按"开始游戏"开始</p>
             </div>
@@ -337,26 +337,36 @@
           else if (e.key === ' ') { e.preventDefault(); hardDrop(); }
         });
 
-        /* 滑屏控制 */
-        var touchStartX, touchStartY;
+        /* 滑屏控制 - 实时追踪 */
+        var tX, tY, tLastDir, tMoved;
         canvas.addEventListener('touchstart', function(e) {
           var t = e.touches[0];
-          touchStartX = t.clientX;
-          touchStartY = t.clientY;
-        }, { passive: true });
+          tX = t.clientX; tY = t.clientY;
+          tLastDir = null; tMoved = false;
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', function(e) {
+          if (!running) return;
+          e.preventDefault();
+          var t = e.touches[0];
+          var dx = t.clientX - tX;
+          var dy = t.clientY - tY;
+          var threshold = 30;
+          if (Math.abs(dx) >= threshold) {
+            var dir = dx > 0 ? 'r' : 'l';
+            if (dir !== tLastDir) { movePiece(dx > 0 ? 1 : -1); tLastDir = dir; }
+            tX = t.clientX; tY = t.clientY;
+            tMoved = true;
+          } else if (dy >= threshold) {
+            drop(); dropTimer = null;
+            tY = t.clientY;
+            tMoved = true;
+          }
+        }, { passive: false });
 
         canvas.addEventListener('touchend', function(e) {
           if (!running) return;
-          var t = e.changedTouches[0];
-          var dx = t.clientX - touchStartX;
-          var dy = t.clientY - touchStartY;
-          var absDx = Math.abs(dx), absDy = Math.abs(dy);
-          if (absDx < 20 && absDy < 20) { hardDrop(); return; }
-          if (absDx > absDy) {
-            if (dx > 0) movePiece(1); else movePiece(-1);
-          } else {
-            if (dy > 0) { drop(); dropTimer = null; } else rotatePiece();
-          }
+          if (!tMoved) { hardDrop(); }
         }, { passive: true });
       })();
 
@@ -474,29 +484,38 @@
           else if (e.key === 'ArrowDown' && dir.y !== -1) { e.preventDefault(); nextDir = { x: 0, y: 1 }; }
         });
 
-        /* 滑屏控制 */
-        var touchStartX2, touchStartY2;
+        /* 滑屏控制 - 实时追踪 */
+        var sX, sY, sLastDir;
         canvas.addEventListener('touchstart', function(e) {
+          if (!running) { startGame(); return; }
           var t = e.touches[0];
-          touchStartX2 = t.clientX;
-          touchStartY2 = t.clientY;
+          sX = t.clientX; sY = t.clientY;
+          sLastDir = null;
         }, { passive: true });
 
-        canvas.addEventListener('touchend', function(e) {
-          if (!running) { startGame(); return; }
-          var t = e.changedTouches[0];
-          var dx = t.clientX - touchStartX2;
-          var dy = t.clientY - touchStartY2;
-          var absDx = Math.abs(dx), absDy = Math.abs(dy);
-          if (absDx < 20 && absDy < 20) return;
-          if (absDx > absDy) {
-            if (dx > 0 && dir.x !== -1) nextDir = { x: 1, y: 0 };
-            else if (dx < 0 && dir.x !== 1) nextDir = { x: -1, y: 0 };
+        canvas.addEventListener('touchmove', function(e) {
+          if (!running) return;
+          e.preventDefault();
+          var t = e.touches[0];
+          var dx = t.clientX - sX;
+          var dy = t.clientY - sY;
+          var threshold = 20;
+          if (Math.abs(dx) < threshold && Math.abs(dy) < threshold) return;
+          var newDir;
+          if (Math.abs(dx) > Math.abs(dy)) {
+            newDir = dx > 0 ? 'r' : 'l';
           } else {
-            if (dy > 0 && dir.y !== -1) nextDir = { x: 0, y: 1 };
-            else if (dy < 0 && dir.y !== 1) nextDir = { x: 0, y: -1 };
+            newDir = dy > 0 ? 'd' : 'u';
           }
-        }, { passive: true });
+          if (newDir !== sLastDir) {
+            if (newDir === 'l' && dir.x !== 1) nextDir = { x: -1, y: 0 };
+            else if (newDir === 'r' && dir.x !== -1) nextDir = { x: 1, y: 0 };
+            else if (newDir === 'u' && dir.y !== 1) nextDir = { x: 0, y: -1 };
+            else if (newDir === 'd' && dir.y !== -1) nextDir = { x: 0, y: 1 };
+            sLastDir = newDir;
+            sX = t.clientX; sY = t.clientY;
+          }
+        }, { passive: false });
       })();
     </script>
   </body>
