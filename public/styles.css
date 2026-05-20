@@ -435,6 +435,130 @@ footer p {
   font-weight: 700;
 }
 
+/* ── Scroll reveal animations ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* stagger children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-stagger.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.revealed > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.revealed > *:nth-child(3) { transition-delay: 0.24s; }
+.reveal-stagger.revealed > *:nth-child(4) { transition-delay: 0.36s; }
+
+/* ── Hover effects ── */
+.skill-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(13, 33, 55, 0.1);
+  border-color: var(--navy);
+}
+
+.project-row img {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-row img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 16px 40px rgba(13, 33, 55, 0.12);
+}
+
+.about-cards article {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 28px;
+  border: 1px solid transparent;
+}
+
+.about-cards article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(13, 33, 55, 0.08);
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.award-list span {
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.award-list span:hover {
+  transform: translateY(-2px);
+  background: #eae5dc;
+}
+
+.primary-link {
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.primary-link:hover {
+  background: #152f4d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(26, 58, 92, 0.25);
+}
+
+.header-button {
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.header-button:hover {
+  background: #fff;
+  color: var(--navy);
+}
+
+.portrait-wrap {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portrait-wrap:hover {
+  transform: scale(1.02);
+}
+
 @media (max-width: 860px) {
   .site-header {
     grid-template-columns: 1fr auto;

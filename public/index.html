@@ -21,7 +21,7 @@
 
     <main id="top">
       <section class="hero section-grid">
-        <div class="hero-copy">
+        <div class="hero-copy reveal-left">
           <p class="eyebrow">COMPUTER SCIENCE &amp; TECHNOLOGY</p>
           <h1>以诚致学<br />以实成事</h1>
           <p class="identity">蔡道涵</p>
@@ -32,7 +32,7 @@
           </p>
           <a class="primary-link" href="#projects">了解经历</a>
         </div>
-        <div class="portrait-wrap" aria-label="个人形象照片">
+        <div class="portrait-wrap reveal-right" aria-label="个人形象照片">
           <img
             class="portrait"
             src="portrait.jpg"
@@ -41,7 +41,7 @@
         </div>
       </section>
 
-      <section id="about" class="about section-grid muted-band">
+      <section id="about" class="about section-grid muted-band reveal">
         <div class="section-title">
           <span>关于我</span>
           <strong>About</strong>
@@ -50,7 +50,7 @@
           <p>
             湖南涉外经济学院计算机科学与技术专业在读学生，来自湖南省湘西州。学习态度端正，勤奋自律，有较强的求知欲和上进心。待人真诚友善，能够合理安排时间，平衡学习与生活。
           </p>
-          <div class="about-cards">
+          <div class="about-cards reveal-stagger">
             <article>
               <h3>工作态度</h3>
               <p>为人踏实认真，责任心强，做事有始有终。善于沟通协作，能快速适应新环境和新任务。对待工作积极主动，注重细节与效率。</p>
@@ -67,7 +67,7 @@
         <div class="center-heading">
           <h2>专业技能</h2>
         </div>
-        <div class="skill-grid">
+        <div class="skill-grid reveal-stagger">
           <article class="skill-card">
             <span class="icon">⌨</span>
             <h3>编程语言</h3>
@@ -105,7 +105,7 @@
         <div class="section-title compact">
           <span>校园经历</span>
         </div>
-        <article class="project-row">
+        <article class="project-row reveal">
           <div class="project-copy">
             <p class="project-meta">01　班级工作 | 2023.09 - 2026.03</p>
             <h3>湖南涉外经济学院 | 生活委员</h3>
@@ -121,7 +121,7 @@
             alt="明亮现代办公空间"
           />
         </article>
-        <article class="project-row">
+        <article class="project-row reveal">
           <div class="project-copy">
             <p class="project-meta">02　学生工作 | 2023.09 - 2026.03</p>
             <h3>校学生会宣传部 | 干事</h3>
@@ -139,7 +139,7 @@
         </article>
       </section>
 
-      <section id="education" class="education section-grid">
+      <section id="education" class="education section-grid reveal">
         <div class="section-title">
           <span>教育背景</span>
         </div>
@@ -160,7 +160,7 @@
         </div>
       </section>
 
-      <section id="contact" class="contact muted-band">
+      <section id="contact" class="contact muted-band reveal">
         <div class="contact-copy">
           <h2>期待与您<br />共同创造价值</h2>
           <p>我是蔡道涵，一名计算机科学与技术专业在读学生。如果您对我的经历感兴趣，欢迎随时与我联系。</p>
@@ -275,6 +275,42 @@
             .then(function() {
               setLoading(false);
             });
+        });
+      })();
+
+      /* ── Scroll reveal ── */
+      (function() {
+        var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-stagger');
+        if (!els.length) return;
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('revealed');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        els.forEach(function(el) { io.observe(el); });
+      })();
+
+      /* ── Navbar scroll effect ── */
+      (function() {
+        var header = document.querySelector('.site-header');
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            requestAnimationFrame(function() {
+              if (window.scrollY > 60) {
+                header.style.boxShadow = '0 2px 20px rgba(13,33,55,0.08)';
+                header.style.background = 'rgba(251,250,246,0.98)';
+              } else {
+                header.style.boxShadow = 'none';
+                header.style.background = 'rgba(251,250,246,0.92)';
+              }
+              ticking = false;
+            });
+            ticking = true;
+          }
         });
       })();
     </script>
