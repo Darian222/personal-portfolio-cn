@@ -304,8 +304,8 @@
             spark.className = 'click-spark';
             var angle = (Math.PI * 2 * i) / SPARK_COUNT + (Math.random() - 0.5) * 0.5;
             var dist = SPARK_RADIUS * (0.6 + Math.random() * 0.4) * EXTRA_SCALE;
-            spark.style.left = e.clientX - 8 + 'px';
-            spark.style.top = e.clientY - 8 + 'px';
+            spark.style.left = e.clientX - 10.5 + 'px';
+            spark.style.top = e.clientY - 10.5 + 'px';
             spark.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
             spark.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
             document.body.appendChild(spark);
