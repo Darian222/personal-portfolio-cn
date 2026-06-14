@@ -19,6 +19,8 @@
   --radius: 8px;
   --mx: 50vw;
   --my: 30vh;
+  --font-sans: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC", "Noto Sans CJK SC", Arial, sans-serif;
+  --font-tech: "Segoe UI", "Arial", "Microsoft YaHei", sans-serif;
 }
 
 * {
@@ -42,7 +44,7 @@ body {
     linear-gradient(180deg, #050914 0%, #07101e 45%, #050914 100%);
   background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
   color: var(--text);
-  font-family: "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.72;
 }
 
@@ -182,7 +184,7 @@ ul {
   border-radius: 7px;
   background: linear-gradient(135deg, rgba(56, 248, 255, 0.18), rgba(185, 103, 255, 0.18));
   color: var(--cyan);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 13px;
   box-shadow: 0 0 24px rgba(56, 248, 255, 0.18);
 }
@@ -294,7 +296,7 @@ ul {
 .eyebrow {
   margin-bottom: 12px;
   color: var(--cyan);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
@@ -380,7 +382,7 @@ h3 {
 .hero-stats strong {
   display: block;
   color: var(--cyan);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 24px;
   line-height: 1.1;
 }
@@ -456,7 +458,7 @@ h3 {
 .code-chip {
   padding: 12px 14px;
   color: var(--cyan);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 13px;
   text-align: center;
 }
@@ -481,7 +483,7 @@ h3 {
   display: block;
   margin-top: 6px;
   color: rgba(56, 248, 255, 0.45);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 44px;
   line-height: 1;
 }
@@ -597,7 +599,7 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 7px;
   color: var(--cyan);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 13px;
   font-weight: 700;
 }
@@ -648,7 +650,7 @@ h3 {
 .project-meta {
   margin-bottom: 9px;
   color: var(--cyan);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 12px;
   font-weight: 700;
 }
@@ -708,7 +710,7 @@ h3 {
 .edu-head time {
   white-space: nowrap;
   color: var(--cyan);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 13px;
 }
 
@@ -988,7 +990,7 @@ footer p {
 
 .stat-value {
   color: var(--cyan);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 22px;
   font-weight: 700;
 }
@@ -1026,7 +1028,7 @@ kbd {
   border-radius: 6px;
   background: rgba(56, 248, 255, 0.08);
   color: var(--text);
-  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  font-family: var(--font-tech);
   font-size: 12px;
 }
 
