@@ -3,48 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>小游戏 - 蔡道涵</title>
+    <title>小游戏实验室 - 蔡道涵</title>
+    <meta name="description" content="蔡道涵个人作品集中的 Canvas 小游戏实验室，包含俄罗斯方块和贪吃蛇。" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;800&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="games-page">
+    <div class="ambient-orbit" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
     <div class="card-nav-container">
       <nav class="card-nav" aria-label="主导航">
-        <div class="card-nav-top">
-          <div class="logo-container">
-            <a href="index.html" style="color:inherit;font-weight:700;font-size:18px;">蔡道涵</a>
-          </div>
-          <div class="nav-secondary">
-            <a href="index.html#about">关于</a>
-            <a href="index.html#skills">技能</a>
-            <a href="index.html#projects">经历</a>
-            <a href="index.html#education">教育</a>
-            <a href="index.html#contact">联系</a>
-            <a href="games.html" class="active">游戏</a>
-          </div>
-          <a class="card-nav-cta-button" href="index.html#contact">联系我</a>
+        <a class="brand" href="index.html">
+          <span class="brand-mark">DH</span>
+          <span>蔡道涵</span>
+        </a>
+        <div class="nav-secondary">
+          <a href="index.html#about">关于</a>
+          <a href="index.html#skills">技能</a>
+          <a href="index.html#projects">项目</a>
+          <a href="index.html#education">教育</a>
+          <a href="index.html#contact">联系</a>
+          <a href="games.html" class="active">游戏</a>
         </div>
+        <a class="card-nav-cta-button" href="index.html#contact">联系我</a>
       </nav>
     </div>
 
     <main>
-      <section class="games-hero">
-        <h1>小游戏</h1>
-        <p>两个经典小游戏，放松一下吧！</p>
+      <section class="games-hero reveal">
+        <p class="eyebrow">CANVAS GAME LAB</p>
+        <h1>小游戏实验室</h1>
+        <p>用原生 JavaScript 和 Canvas 实现经典小游戏，练习状态管理、碰撞检测、键盘与触控交互。</p>
       </section>
 
-      <div class="game-tabs">
-        <button class="game-tab active" data-game="tetris">俄罗斯方块</button>
-        <button class="game-tab" data-game="snake">贪吃蛇</button>
+      <div class="game-tabs reveal" role="tablist" aria-label="游戏切换">
+        <button class="game-tab active" data-game="tetris" type="button" role="tab" aria-selected="true">俄罗斯方块</button>
+        <button class="game-tab" data-game="snake" type="button" role="tab" aria-selected="false">贪吃蛇</button>
       </div>
 
-      <!-- 俄罗斯方块 -->
-      <section class="game-section" id="tetris-panel">
-        <div class="game-container">
-          <div class="game-info">
+      <section class="game-section reveal" id="tetris-panel">
+        <div class="game-container glass-panel">
+          <aside class="game-info">
             <h2>俄罗斯方块</h2>
+            <p class="game-desc">旋转、移动、消除行数，随着等级提升下落速度会逐步加快。</p>
             <div class="game-stats">
               <div class="stat">
                 <span class="stat-label">分数</span>
@@ -66,26 +73,26 @@
             <div class="game-controls">
               <p><kbd>&larr;</kbd> <kbd>&rarr;</kbd> 移动</p>
               <p><kbd>&uarr;</kbd> 旋转</p>
-              <p><kbd>&darr;</kbd> 加速</p>
-              <p><kbd>空格</kbd> 直落</p>
+              <p><kbd>&darr;</kbd> 加速下落</p>
+              <p><kbd>空格</kbd> 直接落下</p>
             </div>
-            <button class="game-btn" id="tetris-start">开始游戏</button>
-            <button class="game-btn game-pause-btn" id="tetris-pause" style="display:none;margin-top:8px;background:var(--muted)">暂停</button>
-          </div>
+            <button class="game-btn" id="tetris-start" type="button">开始游戏</button>
+            <button class="game-btn game-pause-btn" id="tetris-pause" type="button">暂停</button>
+          </aside>
           <div class="canvas-wrap">
-            <canvas id="tetris-canvas" width="300" height="600" style="touch-action:none"></canvas>
+            <canvas id="tetris-canvas" width="300" height="600" aria-label="俄罗斯方块游戏画布"></canvas>
             <div class="game-overlay" id="tetris-overlay">
-              <p>按"开始游戏"开始</p>
+              <p>点击“开始游戏”进入挑战</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 贪吃蛇 -->
-      <section class="game-section" id="snake-panel" style="display:none">
-        <div class="game-container">
-          <div class="game-info">
+      <section class="game-section reveal" id="snake-panel" hidden>
+        <div class="game-container glass-panel">
+          <aside class="game-info">
             <h2>贪吃蛇</h2>
+            <p class="game-desc">控制方向吃到能量点，避免撞墙或碰到自己的身体。</p>
             <div class="game-stats">
               <div class="stat">
                 <span class="stat-label">分数</span>
@@ -99,15 +106,15 @@
             <div class="game-controls">
               <p><kbd>&larr;</kbd> <kbd>&rarr;</kbd> 左右</p>
               <p><kbd>&uarr;</kbd> <kbd>&darr;</kbd> 上下</p>
-              <p><kbd>空格</kbd> 暂停</p>
+              <p><kbd>空格</kbd> 暂停 / 继续</p>
             </div>
-            <button class="game-btn" id="snake-start">开始游戏</button>
-            <button class="game-btn game-pause-btn" id="snake-pause" style="display:none;margin-top:8px;background:var(--muted)">暂停</button>
-          </div>
-          <div class="canvas-wrap">
-            <canvas id="snake-canvas" width="400" height="400" style="touch-action:none"></canvas>
+            <button class="game-btn" id="snake-start" type="button">开始游戏</button>
+            <button class="game-btn game-pause-btn" id="snake-pause" type="button">暂停</button>
+          </aside>
+          <div class="canvas-wrap square-canvas">
+            <canvas id="snake-canvas" width="400" height="400" aria-label="贪吃蛇游戏画布"></canvas>
             <div class="game-overlay" id="snake-overlay">
-              <p>按"开始游戏"开始</p>
+              <p>点击“开始游戏”进入挑战</p>
             </div>
           </div>
         </div>
@@ -115,40 +122,94 @@
     </main>
 
     <footer>
-      <p>蔡道涵 · 以诚致学 · 以实成事</p>
-      <small>&copy; 2026 个人简历. Built with sincerity.</small>
+      <p>蔡道涵 · Canvas Game Lab</p>
+      <small>&copy; <span id="current-year">2026</span> 个人作品集 · Built with JavaScript.</small>
     </footer>
 
     <script>
-      /* ===== Tab 切换 ===== */
-      var tabs = document.querySelectorAll('.game-tab');
-      tabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-          tabs.forEach(function(t) { t.classList.remove('active'); });
-          tab.classList.add('active');
-          document.getElementById('tetris-panel').style.display = tab.dataset.game === 'tetris' ? '' : 'none';
-          document.getElementById('snake-panel').style.display = tab.dataset.game === 'snake' ? '' : 'none';
-        });
-      });
+      document.getElementById('current-year').textContent = new Date().getFullYear();
 
-      /* ===== 俄罗斯方块 ===== */
+      (function() {
+        var tabs = document.querySelectorAll('.game-tab');
+        var panels = {
+          tetris: document.getElementById('tetris-panel'),
+          snake: document.getElementById('snake-panel')
+        };
+
+        tabs.forEach(function(tab) {
+          tab.addEventListener('click', function() {
+            tabs.forEach(function(t) {
+              t.classList.remove('active');
+              t.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+
+            Object.keys(panels).forEach(function(key) {
+              panels[key].hidden = key !== tab.dataset.game;
+            });
+          });
+        });
+      })();
+
+      (function() {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var els = document.querySelectorAll('.reveal, .reveal-stagger');
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          els.forEach(function(el) { el.classList.add('revealed'); });
+          return;
+        }
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.16 });
+        els.forEach(function(el) { io.observe(el); });
+      })();
+
+      (function() {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) return;
+
+        document.addEventListener('pointermove', function(e) {
+          document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+          document.documentElement.style.setProperty('--my', e.clientY + 'px');
+        }, { passive: true });
+
+        document.addEventListener('click', function(e) {
+          for (var i = 0; i < 12; i++) {
+            var spark = document.createElement('span');
+            var angle = (Math.PI * 2 * i) / 12 + (Math.random() - 0.5) * 0.35;
+            var dist = 28 + Math.random() * 36;
+            spark.className = 'click-spark';
+            spark.style.left = e.clientX + 'px';
+            spark.style.top = e.clientY + 'px';
+            spark.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
+            spark.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
+            document.body.appendChild(spark);
+            setTimeout(function(el) { el.remove(); }, 620, spark);
+          }
+        });
+      })();
+
       (function() {
         var canvas = document.getElementById('tetris-canvas');
         var ctx = canvas.getContext('2d');
         var nextCanvas = document.getElementById('tetris-next');
         var nextCtx = nextCanvas.getContext('2d');
-        var COLS = 10, ROWS = 20, BLOCK = 30;
+        var COLS = 10;
+        var ROWS = 20;
+        var BLOCK = 30;
         var scoreEl = document.getElementById('tetris-score');
         var linesEl = document.getElementById('tetris-lines');
         var levelEl = document.getElementById('tetris-level');
         var startBtn = document.getElementById('tetris-start');
+        var pauseBtn = document.getElementById('tetris-pause');
         var overlay = document.getElementById('tetris-overlay');
-
-        var COLORS = [
-          null,
-          '#5bc0de', '#5cb85c', '#d9534f', '#f0ad4e', '#428bca', '#9b59b6', '#1abc9c',
-        ];
-
+        var COLORS = [null, '#38f8ff', '#7cf76f', '#ff4d8d', '#ffd166', '#5c7cfa', '#b967ff', '#00e5a8'];
         var SHAPES = [
           null,
           [[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]],
@@ -157,10 +218,19 @@
           [[0,4,4],[4,4,0],[0,0,0]],
           [[5,5,0],[0,5,5],[0,0,0]],
           [[6,0,0],[6,6,6],[0,0,0]],
-          [[0,0,7],[7,7,7],[0,0,0]],
+          [[0,0,7],[7,7,7],[0,0,0]]
         ];
-
-        var board, piece, nextPiece, score, lines, level, dropInterval, dropTimer, running, animId;
+        var board;
+        var piece;
+        var nextPiece;
+        var score;
+        var lines;
+        var level;
+        var dropInterval;
+        var dropTimer;
+        var running = false;
+        var paused = false;
+        var animId;
 
         function createBoard() {
           var b = [];
@@ -170,7 +240,7 @@
 
         function randomPiece() {
           var id = Math.floor(Math.random() * 7) + 1;
-          return { shape: SHAPES[id].map(function(r) { return r.slice(); }), x: 3, y: 0, id: id };
+          return { shape: SHAPES[id].map(function(row) { return row.slice(); }), x: 3, y: 0, id: id };
         }
 
         function rotate(shape) {
@@ -187,7 +257,8 @@
           for (var r = 0; r < p.shape.length; r++) {
             for (var c = 0; c < p.shape[r].length; c++) {
               if (!p.shape[r][c]) continue;
-              var nx = p.x + c, ny = p.y + r;
+              var nx = p.x + c;
+              var ny = p.y + r;
               if (nx < 0 || nx >= COLS || ny >= ROWS) return false;
               if (ny >= 0 && b[ny][nx]) return false;
             }
@@ -216,46 +287,73 @@
           return cleared;
         }
 
-        function drawBlock(context, x, y, color) {
+        function drawBlock(context, x, y, color, size) {
+          var blockSize = size || BLOCK;
           context.fillStyle = color;
-          context.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
-          context.strokeStyle = 'rgba(255,255,255,0.3)';
-          context.strokeRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
+          context.shadowColor = color;
+          context.shadowBlur = 12;
+          context.fillRect(x * blockSize + 1, y * blockSize + 1, blockSize - 2, blockSize - 2);
+          context.shadowBlur = 0;
+          context.strokeStyle = 'rgba(255,255,255,0.24)';
+          context.strokeRect(x * blockSize + 1, y * blockSize + 1, blockSize - 2, blockSize - 2);
+        }
+
+        function drawGrid() {
+          ctx.fillStyle = '#06111f';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.strokeStyle = 'rgba(56, 248, 255, 0.08)';
+          for (var x = 0; x <= canvas.width; x += BLOCK) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+          }
+          for (var y = 0; y <= canvas.height; y += BLOCK) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+          }
         }
 
         function draw() {
-          ctx.fillStyle = '#fefdfb';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          drawGrid();
           for (var r = 0; r < ROWS; r++) {
             for (var c = 0; c < COLS; c++) {
-              if (board[r][c]) drawBlock(ctx, c, r, COLORS[board[r][c]]);
+              if (board && board[r][c]) drawBlock(ctx, c, r, COLORS[board[r][c]]);
             }
           }
           if (piece) {
-            for (var r = 0; r < piece.shape.length; r++) {
-              for (var c = 0; c < piece.shape[r].length; c++) {
-                if (piece.shape[r][c]) drawBlock(ctx, piece.x + c, piece.y + r, COLORS[piece.id]);
+            for (var pr = 0; pr < piece.shape.length; pr++) {
+              for (var pc = 0; pc < piece.shape[pr].length; pc++) {
+                if (piece.shape[pr][pc]) drawBlock(ctx, piece.x + pc, piece.y + pr, COLORS[piece.id]);
               }
             }
           }
         }
 
         function drawNext() {
-          nextCtx.fillStyle = '#f6f4ee';
+          nextCtx.fillStyle = '#06111f';
           nextCtx.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
           if (!nextPiece) return;
           var s = nextPiece.shape;
-          var ox = (4 - s[0].length) / 2, oy = (4 - s.length) / 2;
+          var ox = (4 - s[0].length) / 2;
+          var oy = (4 - s.length) / 2;
           for (var r = 0; r < s.length; r++) {
             for (var c = 0; c < s[r].length; c++) {
-              if (s[r][c]) {
-                nextCtx.fillStyle = COLORS[nextPiece.id];
-                nextCtx.fillRect((ox + c) * BLOCK, (oy + r) * BLOCK, BLOCK, BLOCK);
-                nextCtx.strokeStyle = 'rgba(255,255,255,0.3)';
-                nextCtx.strokeRect((ox + c) * BLOCK, (oy + r) * BLOCK, BLOCK, BLOCK);
-              }
+              if (s[r][c]) drawBlock(nextCtx, ox + c, oy + r, COLORS[nextPiece.id], 30);
             }
           }
+        }
+
+        function finishGame() {
+          running = false;
+          paused = false;
+          cancelAnimationFrame(animId);
+          overlay.hidden = false;
+          overlay.querySelector('p').textContent = '游戏结束，得分：' + score;
+          startBtn.textContent = '重新开始';
+          pauseBtn.style.display = 'none';
         }
 
         function drop() {
@@ -263,12 +361,12 @@
           if (!valid(piece, board)) {
             piece.y--;
             lock(piece, board);
-            var cl = clearLines(board);
-            if (cl) {
-              lines += cl;
-              score += [0, 100, 300, 500, 800][cl] * level;
+            var cleared = clearLines(board);
+            if (cleared) {
+              lines += cleared;
+              score += [0, 100, 300, 500, 800][cleared] * level;
               level = Math.floor(lines / 10) + 1;
-              dropInterval = Math.max(50, 500 - (level - 1) * 40);
+              dropInterval = Math.max(70, 520 - (level - 1) * 42);
               scoreEl.textContent = score;
               linesEl.textContent = lines;
               levelEl.textContent = level;
@@ -276,68 +374,67 @@
             piece = nextPiece;
             nextPiece = randomPiece();
             drawNext();
-            if (!valid(piece, board)) {
-              running = false;
-              paused = false;
-              cancelAnimationFrame(animId);
-              overlay.style.display = 'flex';
-              overlay.querySelector('p').textContent = '游戏结束！得分：' + score;
-              startBtn.textContent = '重新开始';
-              pauseBtn.style.display = 'none';
-              return;
-            }
+            if (!valid(piece, board)) finishGame();
           }
         }
 
         function tick(ts) {
           if (!running) return;
           if (!dropTimer) dropTimer = ts;
-          if (ts - dropTimer >= dropInterval) { drop(); dropTimer = ts; }
+          if (ts - dropTimer >= dropInterval) {
+            drop();
+            dropTimer = ts;
+          }
           draw();
           animId = requestAnimationFrame(tick);
         }
 
         function startGame() {
+          cancelAnimationFrame(animId);
           board = createBoard();
-          score = 0; lines = 0; level = 1;
-          dropInterval = 500; dropTimer = null;
-          scoreEl.textContent = '0'; linesEl.textContent = '0'; levelEl.textContent = '1';
+          score = 0;
+          lines = 0;
+          level = 1;
+          dropInterval = 520;
+          dropTimer = null;
+          scoreEl.textContent = '0';
+          linesEl.textContent = '0';
+          levelEl.textContent = '1';
           nextPiece = randomPiece();
           piece = randomPiece();
           drawNext();
-          overlay.style.display = 'none';
+          overlay.hidden = true;
           running = true;
+          paused = false;
           startBtn.textContent = '重新开始';
-          pauseBtn.style.display = '';
+          pauseBtn.style.display = 'inline-flex';
           pauseBtn.textContent = '暂停';
           animId = requestAnimationFrame(tick);
         }
 
-        var pauseBtn = document.getElementById('tetris-pause');
-        var paused = false;
         function togglePause() {
-          if (!running) return;
+          if (!piece) return;
           paused = !paused;
           if (paused) {
             running = false;
             cancelAnimationFrame(animId);
-            overlay.style.display = 'flex';
+            overlay.hidden = false;
             overlay.querySelector('p').textContent = '已暂停';
             pauseBtn.textContent = '继续';
           } else {
             running = true;
             dropTimer = null;
-            overlay.style.display = 'none';
+            overlay.hidden = true;
             pauseBtn.textContent = '暂停';
             animId = requestAnimationFrame(tick);
           }
         }
-        pauseBtn.addEventListener('click', togglePause);
 
         function movePiece(dx) {
           if (!running) return;
           piece.x += dx;
           if (!valid(piece, board)) piece.x -= dx;
+          draw();
         }
 
         function rotatePiece() {
@@ -345,6 +442,7 @@
           var old = piece.shape;
           piece.shape = rotate(piece.shape);
           if (!valid(piece, board)) piece.shape = old;
+          draw();
         }
 
         function hardDrop() {
@@ -356,24 +454,35 @@
         }
 
         startBtn.addEventListener('click', startGame);
+        pauseBtn.addEventListener('click', togglePause);
+        pauseBtn.style.display = 'none';
+        drawGrid();
 
         document.addEventListener('keydown', function(e) {
-          if (document.getElementById('tetris-panel').style.display === 'none') return;
-          if (!running && e.key !== 'Enter') return;
+          if (document.getElementById('tetris-panel').hidden) return;
+          if (!running) {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              startGame();
+            }
+            return;
+          }
           if (e.key === 'ArrowLeft') { e.preventDefault(); movePiece(-1); }
           else if (e.key === 'ArrowRight') { e.preventDefault(); movePiece(1); }
           else if (e.key === 'ArrowUp') { e.preventDefault(); rotatePiece(); }
-          else if (e.key === 'ArrowDown') { e.preventDefault(); drop(); dropTimer = null; }
+          else if (e.key === 'ArrowDown') { e.preventDefault(); drop(); dropTimer = null; draw(); }
           else if (e.key === ' ') { e.preventDefault(); hardDrop(); }
         });
 
-        /* 滑屏控制 - 实时追踪 */
-        var tX, tY, tLastDir, tMoved;
+        var tX;
+        var tY;
+        var tMoved;
         canvas.addEventListener('touchstart', function(e) {
           var t = e.touches[0];
-          tX = t.clientX; tY = t.clientY;
-          tLastDir = null; tMoved = false;
-        }, { passive: false });
+          tX = t.clientX;
+          tY = t.clientY;
+          tMoved = false;
+        }, { passive: true });
 
         canvas.addEventListener('touchmove', function(e) {
           if (!running) return;
@@ -381,37 +490,45 @@
           var t = e.touches[0];
           var dx = t.clientX - tX;
           var dy = t.clientY - tY;
-          var threshold = 30;
-          if (Math.abs(dx) >= threshold) {
-            var dir = dx > 0 ? 'r' : 'l';
-            if (dir !== tLastDir) { movePiece(dx > 0 ? 1 : -1); tLastDir = dir; }
-            tX = t.clientX; tY = t.clientY;
+          if (Math.abs(dx) > 28) {
+            movePiece(dx > 0 ? 1 : -1);
+            tX = t.clientX;
             tMoved = true;
-          } else if (dy >= threshold) {
-            drop(); dropTimer = null;
+          } else if (dy > 32) {
+            drop();
+            draw();
             tY = t.clientY;
             tMoved = true;
           }
         }, { passive: false });
 
-        canvas.addEventListener('touchend', function(e) {
-          if (!running) return;
-          if (!tMoved) { hardDrop(); }
+        canvas.addEventListener('touchend', function() {
+          if (running && !tMoved) hardDrop();
         }, { passive: true });
       })();
 
-      /* ===== 贪吃蛇 ===== */
       (function() {
         var canvas = document.getElementById('snake-canvas');
         var ctx = canvas.getContext('2d');
-        var SIZE = 20, COLS = 20, ROWS = 20;
+        var SIZE = 20;
+        var COLS = 20;
+        var ROWS = 20;
         var scoreEl = document.getElementById('snake-score');
         var highEl = document.getElementById('snake-high');
         var startBtn = document.getElementById('snake-start');
+        var pauseBtn = document.getElementById('snake-pause');
         var overlay = document.getElementById('snake-overlay');
-
-        var snake, food, dir, nextDir, score, highScore, running, animId, lastTime, speed;
-        highScore = parseInt(localStorage.getItem('snake-high') || '0', 10);
+        var snake;
+        var food;
+        var dir;
+        var nextDir;
+        var score;
+        var highScore = parseInt(localStorage.getItem('snake-high') || '0', 10);
+        var running = false;
+        var paused = false;
+        var animId;
+        var lastTime;
+        var speed;
         highEl.textContent = highScore;
 
         function initSnake() {
@@ -423,40 +540,68 @@
         function placeFood() {
           do {
             food = { x: Math.floor(Math.random() * COLS), y: Math.floor(Math.random() * ROWS) };
-          } while (snake.some(function(s) { return s.x === food.x && s.y === food.y; }));
+          } while (snake.some(function(seg) { return seg.x === food.x && seg.y === food.y; }));
         }
 
         function drawBoard() {
-          ctx.fillStyle = '#fefdfb';
+          ctx.fillStyle = '#06111f';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.strokeStyle = '#f0ece4';
+          ctx.strokeStyle = 'rgba(56, 248, 255, 0.08)';
           for (var i = 0; i <= COLS; i++) {
-            ctx.beginPath(); ctx.moveTo(i * SIZE, 0); ctx.lineTo(i * SIZE, canvas.height); ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(i * SIZE, 0);
+            ctx.lineTo(i * SIZE, canvas.height);
+            ctx.stroke();
           }
-          for (var i = 0; i <= ROWS; i++) {
-            ctx.beginPath(); ctx.moveTo(0, i * SIZE); ctx.lineTo(canvas.width, i * SIZE); ctx.stroke();
+          for (var j = 0; j <= ROWS; j++) {
+            ctx.beginPath();
+            ctx.moveTo(0, j * SIZE);
+            ctx.lineTo(canvas.width, j * SIZE);
+            ctx.stroke();
           }
         }
 
         function draw() {
           drawBoard();
-          ctx.fillStyle = '#d4745c';
+          if (!food || !snake) return;
+          ctx.fillStyle = '#ff4d8d';
+          ctx.shadowColor = '#ff4d8d';
+          ctx.shadowBlur = 16;
           ctx.beginPath();
           ctx.arc(food.x * SIZE + SIZE / 2, food.y * SIZE + SIZE / 2, SIZE / 2 - 2, 0, Math.PI * 2);
           ctx.fill();
-          snake.forEach(function(seg, i) {
-            ctx.fillStyle = i === 0 ? '#1a3a5c' : '#2e6b9e';
-            ctx.fillRect(seg.x * SIZE + 1, seg.y * SIZE + 1, SIZE - 2, SIZE - 2);
+          ctx.shadowBlur = 0;
+          snake.forEach(function(seg, index) {
+            var color = index === 0 ? '#38f8ff' : '#00e5a8';
+            ctx.fillStyle = color;
+            ctx.shadowColor = color;
+            ctx.shadowBlur = index === 0 ? 14 : 8;
+            ctx.fillRect(seg.x * SIZE + 2, seg.y * SIZE + 2, SIZE - 4, SIZE - 4);
           });
+          ctx.shadowBlur = 0;
+        }
+
+        function gameOver() {
+          running = false;
+          paused = false;
+          cancelAnimationFrame(animId);
+          overlay.hidden = false;
+          overlay.querySelector('p').textContent = '游戏结束，得分：' + score;
+          startBtn.textContent = '重新开始';
+          pauseBtn.style.display = 'none';
         }
 
         function update() {
           dir = { x: nextDir.x, y: nextDir.y };
           var head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
-
-          if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS) { gameOver(); return; }
-          if (snake.some(function(s) { return s.x === head.x && s.y === head.y; })) { gameOver(); return; }
-
+          if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS) {
+            gameOver();
+            return;
+          }
+          if (snake.some(function(seg) { return seg.x === head.x && seg.y === head.y; })) {
+            gameOver();
+            return;
+          }
           snake.unshift(head);
           if (head.x === food.x && head.y === food.y) {
             score += 10;
@@ -466,86 +611,89 @@
               highEl.textContent = highScore;
               localStorage.setItem('snake-high', highScore);
             }
-            speed = Math.max(50, 120 - Math.floor(score / 50) * 10);
+            speed = Math.max(54, 122 - Math.floor(score / 50) * 10);
             placeFood();
           } else {
             snake.pop();
           }
         }
 
-        function gameOver() {
-          running = false;
-          snakePaused = false;
-          overlay.style.display = 'flex';
-          overlay.querySelector('p').textContent = '游戏结束！得分：' + score;
-          startBtn.textContent = '重新开始';
-          snakePauseBtn.style.display = 'none';
-        }
-
         function loop(ts) {
           if (!running) return;
           if (!lastTime) lastTime = ts;
-          if (ts - lastTime >= speed) { update(); lastTime = ts; }
+          if (ts - lastTime >= speed) {
+            update();
+            lastTime = ts;
+          }
           draw();
           animId = requestAnimationFrame(loop);
         }
 
         function startGame() {
+          cancelAnimationFrame(animId);
           initSnake();
-          score = 0; speed = 120; lastTime = null;
+          score = 0;
+          speed = 122;
+          lastTime = null;
           scoreEl.textContent = '0';
           placeFood();
-          overlay.style.display = 'none';
+          overlay.hidden = true;
           running = true;
-          snakePaused = false;
+          paused = false;
           startBtn.textContent = '重新开始';
-          snakePauseBtn.style.display = '';
-          snakePauseBtn.textContent = '暂停';
+          pauseBtn.style.display = 'inline-flex';
+          pauseBtn.textContent = '暂停';
           animId = requestAnimationFrame(loop);
         }
 
-        var snakePauseBtn = document.getElementById('snake-pause');
-        var snakePaused = false;
-        function toggleSnakePause() {
-          if (!running && !snakePaused) return;
-          snakePaused = !snakePaused;
-          if (snakePaused) {
+        function togglePause() {
+          if (!snake) return;
+          paused = !paused;
+          if (paused) {
             running = false;
-            overlay.style.display = 'flex';
+            cancelAnimationFrame(animId);
+            overlay.hidden = false;
             overlay.querySelector('p').textContent = '已暂停';
-            snakePauseBtn.textContent = '继续';
+            pauseBtn.textContent = '继续';
           } else {
             running = true;
             lastTime = null;
-            overlay.style.display = 'none';
-            snakePauseBtn.textContent = '暂停';
+            overlay.hidden = true;
+            pauseBtn.textContent = '暂停';
             animId = requestAnimationFrame(loop);
           }
         }
-        snakePauseBtn.addEventListener('click', toggleSnakePause);
 
         startBtn.addEventListener('click', startGame);
+        pauseBtn.addEventListener('click', togglePause);
+        pauseBtn.style.display = 'none';
+        drawBoard();
 
         document.addEventListener('keydown', function(e) {
-          if (document.getElementById('snake-panel').style.display === 'none') return;
-          if (!running) {
-            if (e.key === ' ') { e.preventDefault(); startGame(); }
+          if (document.getElementById('snake-panel').hidden) return;
+          if (e.key === ' ') {
+            e.preventDefault();
+            if (!snake) startGame();
+            else togglePause();
             return;
           }
-          if (e.key === ' ') { e.preventDefault(); toggleSnakePause(); return; }
+          if (!running) return;
           if (e.key === 'ArrowLeft' && dir.x !== 1) { e.preventDefault(); nextDir = { x: -1, y: 0 }; }
           else if (e.key === 'ArrowRight' && dir.x !== -1) { e.preventDefault(); nextDir = { x: 1, y: 0 }; }
           else if (e.key === 'ArrowUp' && dir.y !== 1) { e.preventDefault(); nextDir = { x: 0, y: -1 }; }
           else if (e.key === 'ArrowDown' && dir.y !== -1) { e.preventDefault(); nextDir = { x: 0, y: 1 }; }
         });
 
-        /* 滑屏控制 - 实时追踪 */
-        var sX, sY, sLastDir;
+        var sX;
+        var sY;
         canvas.addEventListener('touchstart', function(e) {
-          if (!running) { startGame(); return; }
+          if (!running && !snake) {
+            startGame();
+            return;
+          }
           var t = e.touches[0];
-          sX = t.clientX; sY = t.clientY;
-          sLastDir = null;
+          sX = t.clientX;
+          sY = t.clientY;
         }, { passive: true });
 
         canvas.addEventListener('touchmove', function(e) {
@@ -554,22 +702,16 @@
           var t = e.touches[0];
           var dx = t.clientX - sX;
           var dy = t.clientY - sY;
-          var threshold = 20;
-          if (Math.abs(dx) < threshold && Math.abs(dy) < threshold) return;
-          var newDir;
+          if (Math.abs(dx) < 18 && Math.abs(dy) < 18) return;
           if (Math.abs(dx) > Math.abs(dy)) {
-            newDir = dx > 0 ? 'r' : 'l';
+            if (dx > 0 && dir.x !== -1) nextDir = { x: 1, y: 0 };
+            if (dx < 0 && dir.x !== 1) nextDir = { x: -1, y: 0 };
           } else {
-            newDir = dy > 0 ? 'd' : 'u';
+            if (dy > 0 && dir.y !== -1) nextDir = { x: 0, y: 1 };
+            if (dy < 0 && dir.y !== 1) nextDir = { x: 0, y: -1 };
           }
-          if (newDir !== sLastDir) {
-            if (newDir === 'l' && dir.x !== 1) nextDir = { x: -1, y: 0 };
-            else if (newDir === 'r' && dir.x !== -1) nextDir = { x: 1, y: 0 };
-            else if (newDir === 'u' && dir.y !== 1) nextDir = { x: 0, y: -1 };
-            else if (newDir === 'd' && dir.y !== -1) nextDir = { x: 0, y: 1 };
-            sLastDir = newDir;
-            sX = t.clientX; sY = t.clientY;
-          }
+          sX = t.clientX;
+          sY = t.clientY;
         }, { passive: false });
       })();
     </script>

@@ -3,121 +3,150 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>蔡道涵 - 个人简历</title>
+    <title>蔡道涵 - 个人作品集</title>
+    <meta
+      name="description"
+      content="蔡道涵的个人简历与作品集网站，展示软件开发、Web 前端、小程序和 Canvas 游戏项目。"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;800&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="ambient-orbit" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
     <div class="card-nav-container">
       <nav class="card-nav" aria-label="主导航">
-        <div class="card-nav-top">
-          <div class="logo-container">
-            <a href="#top" style="color:inherit;font-weight:700;font-size:18px;">蔡道涵</a>
-          </div>
-          <div class="nav-secondary">
-            <a href="#about" data-section="about">关于</a>
-            <a href="#skills" data-section="skills">技能</a>
-            <a href="#projects" data-section="projects">项目</a>
-            <a href="#education" data-section="education">教育</a>
-            <a href="#contact" data-section="contact">联系</a>
-            <a href="games.html">游戏</a>
-          </div>
-          <a class="card-nav-cta-button" href="#contact">联系我</a>
+        <a class="brand" href="#top" aria-label="返回首页">
+          <span class="brand-mark">DH</span>
+          <span>蔡道涵</span>
+        </a>
+        <div class="nav-secondary">
+          <a href="#about" data-section="about">关于</a>
+          <a href="#skills" data-section="skills">技能</a>
+          <a href="#projects" data-section="projects">项目</a>
+          <a href="#education" data-section="education">教育</a>
+          <a href="#contact" data-section="contact">联系</a>
+          <a href="games.html">游戏</a>
         </div>
+        <a class="card-nav-cta-button" href="#contact">联系我</a>
       </nav>
     </div>
 
     <main id="top">
       <section class="hero section-grid">
         <div class="hero-copy reveal-left">
-          <p class="eyebrow">COMPUTER SCIENCE &amp; TECHNOLOGY</p>
-          <h1>以诚致学<br />以实成事</h1>
-          <p class="identity">蔡道涵</p>
-          <p>湖南涉外经济学院 · 计算机科学与技术 · 2023级</p>
-          <p>求职意向：软件开发工程师 | 长沙</p>
+          <p class="eyebrow">COMPUTER SCIENCE / WEB DEVELOPMENT</p>
+          <h1><span>用代码构建体验</span><span>用项目验证成长</span></h1>
+          <p class="identity">蔡道涵 · 软件开发工程师方向</p>
+          <p class="hero-meta">湖南涉外经济学院 · 计算机科学与技术 · 2023 级</p>
           <p class="hero-text">
-            计算机科学与技术专业在读本科生，学习态度端正，勤奋自律，具备较强的求知欲与上进心。期待在真实项目中持续沉淀专业能力，创造长期价值。
+            我正在系统学习计算机科学与 Web 开发，关注前端体验、小程序、数据处理与工程化部署。
+            希望在真实项目中持续沉淀专业能力，做出稳定、清晰、有价值的产品。
           </p>
-          <a class="primary-link" href="#projects">了解经历</a>
+          <div class="hero-actions">
+            <a class="primary-link" href="#projects">查看项目</a>
+            <a class="secondary-link" href="games.html">体验小游戏</a>
+          </div>
+          <div class="hero-stats" aria-label="个人信息概览">
+            <span><strong>4</strong> 个核心经历</span>
+            <span><strong>8+</strong> 项技术栈</span>
+            <span><strong>2027</strong> 本科毕业</span>
+          </div>
         </div>
-        <div class="portrait-wrap reveal-right" aria-label="个人形象照片">
-          <img
-            class="portrait"
-            src="portrait.jpg"
-            alt="蔡道涵个人照片"
-          />
+        <div class="portrait-panel reveal-right" aria-label="个人形象照片">
+          <div class="portrait-frame">
+            <img class="portrait" src="portrait.png" alt="蔡道涵个人照片" />
+          </div>
+          <div class="signal-card">
+            <span class="signal-dot"></span>
+            <span>可实习 · 软件开发方向</span>
+          </div>
+          <div class="code-chip">HTML · CSS · JavaScript · Java · Python</div>
         </div>
       </section>
 
-      <section id="about" class="about section-grid muted-band reveal">
+      <section id="about" class="about section-grid reveal">
         <div class="section-title">
           <span>关于我</span>
           <strong>About</strong>
         </div>
-        <div class="about-content">
+        <div class="about-content glass-panel">
           <p>
-            湖南涉外经济学院计算机科学与技术专业在读学生，来自湖南省湘西州。学习态度端正，勤奋自律，有较强的求知欲和上进心。待人真诚友善，能够合理安排时间，平衡学习与生活。
+            本人具备较强的自主学习与项目落地能力，能够熟练利用 AI 工具辅助开发，独立完成需求分析、
+            产品设计、功能开发、测试部署等完整流程。曾独立开发生活足迹记录微信小程序，完成地图轨迹可视化、
+            云开发架构搭建、AI 内容生成等功能实现。
+          </p>
+          <p>
+            对 AI 应用开发、Web 开发和产品创新具有浓厚兴趣，善于通过实践解决问题。在项目开发过程中能够快速定位并解决技术问题，
+            持续优化产品体验。具备较强的学习能力和执行力，能够主动探索新技术并将其应用于实际项目。
           </p>
           <div class="about-cards reveal-stagger">
             <article>
               <h3>工作态度</h3>
-              <p>为人踏实认真，责任心强，做事有始有终。善于沟通协作，能快速适应新环境和新任务。对待工作积极主动，注重细节与效率。</p>
+              <p>踏实认真，责任心强，做事有始有终。善于沟通协作，能快速适应新环境和新任务。</p>
             </article>
             <article>
               <h3>个人素质</h3>
-              <p>工作态度严谨，目标感强，具备良好的执行力和抗压能力。善于发现问题并主动解决，重视团队配合与结果导向，追求稳定进步。</p>
+              <p>目标感强，具备良好的执行力和抗压能力。重视团队配合、细节质量和结果交付。</p>
             </article>
           </div>
         </div>
       </section>
 
       <section id="skills" class="skills">
-        <div class="center-heading">
+        <div class="center-heading reveal">
+          <p class="eyebrow">TECH STACK</p>
           <h2>专业技能</h2>
         </div>
         <div class="skill-grid reveal-stagger">
           <article class="skill-card">
-            <span class="icon">⌨</span>
+            <span class="icon">01</span>
             <h3>编程语言</h3>
             <ul>
-              <li>Java — 面向对象设计与开发</li>
-              <li>Python — 数据处理与脚本开发</li>
-              <li>Web 前端 — HTML / CSS / JavaScript</li>
+              <li>Java：面向对象设计与基础后端开发</li>
+              <li>Python：脚本编写、数据处理与自动化</li>
+              <li>JavaScript：页面交互、表单校验与 Canvas 游戏</li>
             </ul>
           </article>
           <article class="skill-card">
-            <span class="icon">▣</span>
-            <h3>工具与技术</h3>
+            <span class="icon">02</span>
+            <h3>Web 与工具</h3>
             <div class="tags">
-              <span>JavaWeb</span>
-              <span>Linux</span>
-              <span>MySQL</span>
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
               <span>Git</span>
               <span>VS Code</span>
-              <span>Adobe Suite</span>
+              <span>GitHub Actions</span>
             </div>
           </article>
           <article class="skill-card">
-            <span class="icon">▥</span>
-            <h3>核心课程</h3>
+            <span class="icon">03</span>
+            <h3>课程基础</h3>
             <ul>
               <li>数据结构 · 算法分析</li>
               <li>操作系统 · 计算机网络</li>
-              <li>软件工程 · 编译原理</li>
+              <li>软件工程 · 编译原理 · JavaWeb</li>
             </ul>
           </article>
         </div>
       </section>
 
       <section id="projects" class="projects">
-        <div class="section-title compact">
+        <div class="section-title compact reveal">
           <span>项目与经历</span>
+          <strong>Projects</strong>
         </div>
+
         <article class="project-row reveal">
           <div class="project-copy">
-            <p class="project-meta">01　项目实践 | 2026.03 - 2026.06</p>
+            <p class="project-meta">01 · 项目实践 | 2026.03 - 2026.06</p>
             <h3>微信小程序：人生轨迹 | 独立全栈开发</h3>
             <div class="project-tech">
               <span>微信小程序</span>
@@ -129,10 +158,9 @@
             </div>
             <ul>
               <li>设计并实现生活轨迹记录小程序，支持标题、描述、图片、定位、情绪标签等多维录入。</li>
-              <li>集成腾讯地图定位与逆地理编码能力，实现地点记录、地图标记展示、50 米范围地点聚类及访问频次统计。</li>
-              <li>开发时间轴、图库、地点、搜索、统计、年度回忆等核心页面，支持按年份、标签、地点组织记录并可视化展示。</li>
+              <li>集成腾讯地图定位与逆地理编码，实现地点记录、地图标记、地点聚类和访问统计。</li>
+              <li>开发时间轴、图库、地点、搜索、统计、年度回忆等核心页面，支持按年份、标签、地点组织记录。</li>
               <li>接入云函数与 DeepSeek 接口生成每日/年度 AI 总结，并加入超时保护、失败降级和本地模板兜底。</li>
-              <li>优化云数据库访问与分页加载逻辑，结合缓存、数据聚合和级联更新机制，保障地点与记忆数据一致。</li>
             </ul>
           </div>
           <img
@@ -140,9 +168,10 @@
             alt="开发者在笔记本电脑前调试移动端应用"
           />
         </article>
+
         <article class="project-row reveal">
           <div class="project-copy">
-            <p class="project-meta">02　项目实践 | 2026.05 - 2026.06</p>
+            <p class="project-meta">02 · 项目实践 | 2026.05 - 2026.06</p>
             <h3>个人简历作品集网站 | 独立开发</h3>
             <div class="project-tech">
               <span>HTML</span>
@@ -154,9 +183,9 @@
             </div>
             <ul>
               <li>独立完成个人作品集网站开发，围绕简历展示、教育背景、校园经历、专业技能与联系方式搭建完整页面结构。</li>
-              <li>使用原生 JavaScript 实现滚动高亮、入场动画、点击粒子效果和联系表单校验，提升页面交互体验。</li>
-              <li>开发小游戏页面，基于 Canvas 实现俄罗斯方块和贪吃蛇，包含分数统计、暂停/继续、最高分本地存储、键盘与移动端触控操作。</li>
-              <li>配置 GitHub Actions 自动部署 GitHub Pages，并保留 Vercel 静态站点与函数部署配置，具备从开发到上线的完整实践。</li>
+              <li>使用原生 JavaScript 实现滚动高亮、入场动画、点击粒子效果和联系表单校验。</li>
+              <li>开发小游戏页面，基于 Canvas 实现俄罗斯方块和贪吃蛇，包含分数统计、暂停/继续、最高分本地存储和移动端触控。</li>
+              <li>配置 GitHub Actions 自动部署 GitHub Pages，并保留 Vercel 静态站点与函数部署配置。</li>
             </ul>
             <div class="project-actions">
               <a href="https://darian222.github.io/personal-portfolio-cn" target="_blank" rel="noreferrer">访问网站</a>
@@ -168,14 +197,15 @@
             alt="桌面上的代码编辑器与前端开发环境"
           />
         </article>
+
         <article class="project-row reveal">
           <div class="project-copy">
-            <p class="project-meta">03　班级工作 | 2023.09 - 2026.03</p>
+            <p class="project-meta">03 · 班级工作 | 2023.09 - 2026.03</p>
             <h3>湖南涉外经济学院 | 生活委员</h3>
             <ul>
               <li>管理班费收支，做好记录并确保公开透明。</li>
               <li>负责班级卫生安排与值日检查，保障班级环境整洁。</li>
-              <li>关心同学生活，协调反映住宿、饮食等实际问题。</li>
+              <li>关心同学生活，协调反馈住宿、饮食等实际问题。</li>
               <li>协助组织班级活动，采购物资、布置场地，配合老师完成后勤与通知工作。</li>
             </ul>
           </div>
@@ -184,13 +214,14 @@
             alt="明亮现代办公空间"
           />
         </article>
+
         <article class="project-row reveal">
           <div class="project-copy">
-            <p class="project-meta">04　学生工作 | 2023.09 - 2026.03</p>
+            <p class="project-meta">04 · 学生工作 | 2023.09 - 2026.03</p>
             <h3>校学生会宣传部 | 干事</h3>
             <ul>
               <li>负责校级大型活动的线上宣传推广与视觉设计工作。</li>
-              <li>参与策划"2023级迎新晚会"宣传方案，覆盖全校新生。</li>
+              <li>参与策划“2023 级迎新晚会”宣传方案，覆盖全校新生。</li>
               <li>独立制作宣传视频 3 条，投放于校内各平台。</li>
               <li>负责校学生会公众号的日常排版与内容运营。</li>
             </ul>
@@ -205,8 +236,9 @@
       <section id="education" class="education section-grid reveal">
         <div class="section-title">
           <span>教育背景</span>
+          <strong>Education</strong>
         </div>
-        <div class="education-content">
+        <div class="education-content glass-panel">
           <div class="edu-head">
             <div>
               <h3>湖南涉外经济学院</h3>
@@ -214,7 +246,10 @@
             </div>
             <time>2023.09 - 2027.06</time>
           </div>
-          <p><strong>主修课程：</strong>操作系统、高级语言程序设计、数据结构、Java程序设计、计算机网络、Linux操作系统应用、JavaWeb程序设计、Web前端开发技术、软件工程、编译原理</p>
+          <p>
+            <strong>主修课程：</strong>操作系统、高级语言程序设计、数据结构、Java 程序设计、计算机网络、
+            Linux 操作系统应用、JavaWeb 程序设计、Web 前端开发技术、软件工程、编译原理。
+          </p>
           <div class="award-list">
             <span>班级生活委员</span>
             <span>校学生会宣传部干事</span>
@@ -223,16 +258,21 @@
         </div>
       </section>
 
-      <section id="contact" class="contact muted-band reveal">
+      <section id="contact" class="contact reveal">
         <div class="contact-copy">
+          <p class="eyebrow">CONTACT</p>
           <h2>期待与您<br />共同创造价值</h2>
-          <p>我是蔡道涵，一名计算机科学与技术专业在读学生。如果您对我的经历感兴趣，欢迎随时与我联系。</p>
+          <p>
+            我是蔡道涵，一名计算机科学与技术专业在读学生。如果您对我的经历或项目感兴趣，
+            欢迎随时与我联系。
+          </p>
           <div class="contact-lines">
             <span>1449157740@qq.com</span>
             <span>18107439735</span>
+            <span>长沙 · 可实习</span>
           </div>
         </div>
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form glass-panel" id="contact-form">
           <label>
             您的姓名
             <input type="text" name="姓名" placeholder="张先生 / 李女士" required />
@@ -243,31 +283,32 @@
           </label>
           <label class="full">
             留言内容
-            <textarea name="留言" placeholder="请简单介绍合作意向..." required></textarea>
+            <textarea name="留言" placeholder="请简单介绍合作意向或想了解的内容..." required></textarea>
           </label>
           <button type="submit" id="submit-btn">发送咨询</button>
-          <p id="form-msg" style="grid-column:1/-1;margin:0;font-size:14px;"></p>
+          <p id="form-msg"></p>
         </form>
       </section>
     </main>
 
     <footer>
-      <p>蔡道涵 · 以诚致学 · 以实成事</p>
-      <small>© <span id="current-year">2026</span> 个人简历. Built with sincerity.</small>
+      <p>蔡道涵 · 用代码构建体验 · 用项目验证成长</p>
+      <small>&copy; <span id="current-year">2026</span> 个人作品集 · Built with sincerity.</small>
     </footer>
+
     <script>
       (function() {
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
         var form = document.getElementById('contact-form');
         var btn = document.getElementById('submit-btn');
         var msg = document.getElementById('form-msg');
-
         var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         var TIMEOUT_MS = 10000;
 
         function showMsg(text, isError) {
           msg.innerHTML = text;
-          msg.style.color = isError ? '#c53030' : '#2d7d46';
+          msg.className = isError ? 'is-error' : 'is-success';
         }
 
         function setLoading(loading) {
@@ -294,12 +335,12 @@
           var message = form.querySelector('[name="留言"]').value.trim();
 
           if (!name || !email || !message) {
-            showMsg('请填写所有字段', true);
+            showMsg('请填写所有字段。', true);
             return;
           }
 
           if (!EMAIL_RE.test(email)) {
-            showMsg('请输入有效的邮箱地址', true);
+            showMsg('请输入有效的邮箱地址。', true);
             return;
           }
 
@@ -318,11 +359,11 @@
             .then(function(data) {
               clearTimeout(timeout);
               if (data.ok) {
-                showMsg('发送成功，我会尽快回复！', false);
+                showMsg('发送成功，我会尽快回复。', false);
                 form.reset();
               } else {
                 showMsg(
-                  data.error + '。或直接发送邮件：<a href="' + mailtoLink(name, email, message) + '" style="color:#1a3a5c;text-decoration:underline">使用邮件客户端发送</a>',
+                  (data.error || '发送失败') + '。也可以直接<a href="' + mailtoLink(name, email, message) + '">使用邮件客户端发送</a>。',
                   true
                 );
               }
@@ -331,7 +372,7 @@
               clearTimeout(timeout);
               var tip = (err.name === 'AbortError') ? '请求超时' : '网络错误';
               showMsg(
-                tip + '。请直接发送邮件：<a href="' + mailtoLink(name, email, message) + '" style="color:#1a3a5c;text-decoration:underline">使用邮件客户端发送</a>',
+                tip + '。请直接<a href="' + mailtoLink(name, email, message) + '">使用邮件客户端发送</a>。',
                 true
               );
             })
@@ -341,10 +382,14 @@
         });
       })();
 
-      /* ── Scroll reveal ── */
       (function() {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-stagger');
         if (!els.length) return;
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          els.forEach(function(el) { el.classList.add('revealed'); });
+          return;
+        }
         var io = new IntersectionObserver(function(entries) {
           entries.forEach(function(e) {
             if (e.isIntersecting) {
@@ -356,30 +401,6 @@
         els.forEach(function(el) { io.observe(el); });
       })();
 
-      /* ── Click spark ── */
-      (function() {
-        var SPARK_COUNT = 13;
-        var SPARK_RADIUS = 39;
-        var EXTRA_SCALE = 1;
-        document.addEventListener('click', function(e) {
-          for (var i = 0; i < SPARK_COUNT; i++) {
-            var spark = document.createElement('div');
-            spark.className = 'click-spark';
-            var angle = (Math.PI * 2 * i) / SPARK_COUNT + (Math.random() - 0.5) * 0.5;
-            var dist = SPARK_RADIUS * (0.6 + Math.random() * 0.4) * EXTRA_SCALE;
-            spark.style.left = e.clientX - 10.5 + 'px';
-            spark.style.top = e.clientY - 10.5 + 'px';
-            spark.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
-            spark.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
-            document.body.appendChild(spark);
-            (function(el) {
-              setTimeout(function() { el.remove(); }, 500);
-            })(spark);
-          }
-        });
-      })();
-
-      /* ── Scroll-spy: highlight active nav link ── */
       (function() {
         var links = document.querySelectorAll('.nav-secondary a[data-section]');
         var sections = {};
@@ -388,16 +409,14 @@
           var section = document.getElementById(id);
           if (section) sections[id] = section;
         });
-
         var ids = Object.keys(sections);
+
         function updateActive() {
-          var scrollY = window.scrollY + 120;
+          var scrollY = window.scrollY + 140;
           var current = '';
-          for (var i = 0; i < ids.length; i++) {
-            if (sections[ids[i]].offsetTop <= scrollY) {
-              current = ids[i];
-            }
-          }
+          ids.forEach(function(id) {
+            if (sections[id].offsetTop <= scrollY) current = id;
+          });
           links.forEach(function(link) {
             link.classList.toggle('active', link.getAttribute('data-section') === current);
           });
@@ -407,6 +426,31 @@
         updateActive();
       })();
 
+      (function() {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var glow = document.querySelector('.cursor-glow');
+        if (!glow || reduceMotion) return;
+
+        document.addEventListener('pointermove', function(e) {
+          document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+          document.documentElement.style.setProperty('--my', e.clientY + 'px');
+        }, { passive: true });
+
+        document.addEventListener('click', function(e) {
+          for (var i = 0; i < 14; i++) {
+            var spark = document.createElement('span');
+            var angle = (Math.PI * 2 * i) / 14 + (Math.random() - 0.5) * 0.4;
+            var dist = 34 + Math.random() * 42;
+            spark.className = 'click-spark';
+            spark.style.left = e.clientX + 'px';
+            spark.style.top = e.clientY + 'px';
+            spark.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
+            spark.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
+            document.body.appendChild(spark);
+            setTimeout(function(el) { el.remove(); }, 620, spark);
+          }
+        });
+      })();
     </script>
   </body>
 </html>
