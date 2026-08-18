@@ -1,4 +1,15 @@
 {
   "name": "personal-portfolio-cn",
-  "private": true
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "check": "node --check api/contact.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.10.0"
+  },
+  "devDependencies": {
+    "vercel": "^53.3.0",
+    "wrangler": "^4.90.0"
+  }
 }

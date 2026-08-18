@@ -55,7 +55,22 @@
         </div>
         <div class="portrait-panel reveal-right" aria-label="个人形象照片">
           <div class="portrait-frame">
-            <img class="portrait" src="portrait.png" alt="蔡道涵个人照片" />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="portrait-360.webp 360w, portrait-640.webp 640w, portrait-840.webp 840w"
+                sizes="(max-width: 680px) calc(100vw - 36px), (max-width: 1180px) 420px, 430px"
+              />
+              <img
+                class="portrait"
+                src="portrait.jpg"
+                width="640"
+                height="997"
+                alt="蔡道涵个人照片"
+                decoding="async"
+                fetchpriority="high"
+              />
+            </picture>
           </div>
           <div class="signal-card">
             <span class="signal-dot"></span>
@@ -158,8 +173,10 @@
             </ul>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=880&q=85"
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=880&q=75"
             alt="开发者在笔记本电脑前调试移动端应用"
+            loading="lazy"
+            decoding="async"
           />
         </article>
 
@@ -187,8 +204,10 @@
             </div>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=880&q=85"
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=880&q=75"
             alt="桌面上的代码编辑器与前端开发环境"
+            loading="lazy"
+            decoding="async"
           />
         </article>
 
@@ -204,8 +223,10 @@
             </ul>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=880&q=85"
+            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=880&q=75"
             alt="明亮现代办公空间"
+            loading="lazy"
+            decoding="async"
           />
         </article>
 
@@ -221,8 +242,10 @@
             </ul>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=880&q=85"
+            src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=880&q=75"
             alt="两人在会议桌前讨论项目"
+            loading="lazy"
+            decoding="async"
           />
         </article>
       </section>
@@ -343,7 +366,7 @@
           var controller = new AbortController();
           var timeout = setTimeout(function() { controller.abort(); }, TIMEOUT_MS);
 
-          fetch('https://1430387116-b6dsj7177h.ap-guangzhou.tencentscf.com', {
+          fetch('/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: name, email: email, message: message }),
